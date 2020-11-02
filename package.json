@@ -1,0 +1,13 @@
+{
+  "name": "playlistSync",
+  "version": "0.0.1",
+  "description": "Keep Apple music and Spotify playlists in sync",
+  "main": "index.js",
+  "repository": "https://github.com/nishad10/playlistSync.git",
+  "author": "nishad.aherrao10@gmail.com",
+  "license": "GPL",
+  "private": false,
+  "dependencies": {
+    "node-cron": "^2.0.3"
+  }
+}
