@@ -1,9 +1,8 @@
 require('dotenv').config()
-const {getPlaylists} = require('./utils')
+const { sync } = require('./services')
+
 const cron = require('node-cron');
-
-getPlaylists()
-
+sync()
 cron.schedule('* * * * *', () => {
     console.log('running a task every minute');
     //scrape()
