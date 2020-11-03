@@ -35,7 +35,10 @@ const addMusicData = async (playlists) => {
     const responses = await Promise.all(requests)
     responses.forEach(response => {
         const musicAttributes = response.data.data[0].relationships.tracks.data
-        playlists['songData'] = musicAttributes
+      playlists['songData'] = musicAttributes.map(songAttribute => {
+        songAttribute = songAttribute['attributes']
+        return { 'artistName': songAttribute['artistName'], 'songName': songAttribute['name'], 'albumName': songAttribute['albumName'] }
+      })
     })
     return playlists
 }
