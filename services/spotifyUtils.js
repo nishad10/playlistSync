@@ -70,14 +70,38 @@ const setupSpotifyAPI = async () => {
 };
 
 const getPlaylistData = async () => {
-  spotifyApi = await setupSpotifyAPI();
-  spotifyApi.getUserPlaylists().then(
-    function (data) {
-      console.log('Retrieved playlists', data.body);
-    },
-    function (err) {
-      console.log('Something went wrong!', err);
-    }
+  const spotifyApi = await setupSpotifyAPI();
+  spotifyApi.refreshAccessToken();
+  const playlistsAll = await spotifyApi.getUserPlaylists({ limit: 50 });
+  const applePlaylists = playlistsAll.body.items.filter(
+    (playlist) => playlist.description == 'AppleMusicImported'
   );
+  let applePlaylistsMetaData = async () =>
+    Promise.all(
+      applePlaylists.map(async (playlist) => {
+        const playlistMusicAllData = await spotifyApi.getPlaylistTracks(
+          playlist.id,
+          {
+            limit: 100,
+            fields: 'items',
+          }
+        );
+        const playlistMusicList = playlistMusicAllData.body.items.map(
+          (item) => {
+            item = item.track;
+            return {
+              //id: item.track.id,
+              //url: item.track.href,
+              albumName: item.album.name,
+              artistName: item.artists[0].name,
+              songName: item.name,
+            };
+          }
+        );
+        return [playlist.name, playlistMusicList];
+      })
+    );
+  applePlaylistsMetaData = await applePlaylistsMetaData();
+  return Object.fromEntries(applePlaylistsMetaData);
 };
 module.exports = { getPlaylistData, setupSpotifyAPI };
