@@ -5,9 +5,14 @@
   "main": "index.js",
   "repository": "https://github.com/nishad10/playlistSync.git",
   "author": "nishad.aherrao10@gmail.com",
-  "license": "GPL",
+  "license": "GPL-3.0",
   "private": false,
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
+    "axios": "^0.21.0",
+    "dotenv": "^8.2.0",
     "node-cron": "^2.0.3"
   }
 }

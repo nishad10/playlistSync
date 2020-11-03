@@ -1,3 +1,9 @@
+# Custom Additions
+*.mock
+
+
+
+
 # Logs
 logs
 *.log
