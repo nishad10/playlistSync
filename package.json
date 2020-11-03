@@ -13,6 +13,8 @@
   "dependencies": {
     "axios": "^0.21.0",
     "dotenv": "^8.2.0",
-    "node-cron": "^2.0.3"
+    "fs": "^0.0.1-security",
+    "node-cron": "^2.0.3",
+    "spotify-web-api-node": "^5.0.0"
   }
 }
